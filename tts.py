@@ -12,12 +12,11 @@ def synthesize_to_speaker(text):
     audio_data_stream = speechsdk.AudioDataStream(result)
     audio_buffer = bytes(16000)
     filled_size = audio_data_stream.read_data(audio_buffer)
-    stream.write(audio_buffer)
     while filled_size > 0:
         print(f"{filled_size} bytes received.")
+        stream.write(audio_buffer)
         audio_buffer = bytes(16000)
         filled_size = audio_data_stream.read_data(audio_buffer)
-        stream.write(audio_buffer)
 
 
 text = """
