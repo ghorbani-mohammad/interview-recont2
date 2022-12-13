@@ -1,6 +1,7 @@
 import pyaudio
 import azure.cognitiveservices.speech as speechsdk
 
+
 def synthesize_to_speaker(text):
     speech_config = speechsdk.SpeechConfig(subscription="", region="")
     synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=None)
