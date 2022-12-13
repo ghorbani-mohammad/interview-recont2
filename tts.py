@@ -1,15 +1,23 @@
+import pyaudio
 import azure.cognitiveservices.speech as speechsdk
 
 def synthesize_to_speaker(text):
+    # create a stream to output
+    audio_streamer = pyaudio.PyAudio()
+    stream = audio_streamer.open(format=8,channels=1,rate=16000,output=True)
+
     speech_config = speechsdk.SpeechConfig(subscription="", region="")
     synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=None)
     result = synthesizer.start_speaking_text_async(text).get()
     audio_data_stream = speechsdk.AudioDataStream(result)
     audio_buffer = bytes(16000)
     filled_size = audio_data_stream.read_data(audio_buffer)
+    stream.write(audio_buffer)
     while filled_size > 0:
         print(f"{filled_size} bytes received.")
+        audio_buffer = bytes(16000)
         filled_size = audio_data_stream.read_data(audio_buffer)
+        stream.write(audio_buffer)
 
 
 text = """

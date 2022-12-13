@@ -1,1 +1,2 @@
+pyaudio
 azure-cognitiveservices-speech==1.24.2
