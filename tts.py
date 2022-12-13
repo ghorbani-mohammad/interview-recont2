@@ -1,11 +1,9 @@
 import azure.cognitiveservices.speech as speechsdk
-from azure.cognitiveservices.speech.audio import AudioOutputConfig
 
 def synthesize_to_speaker(text):
     speech_config = speechsdk.SpeechConfig(subscription="", region="")
-    audio_config = AudioOutputConfig(use_default_speaker=True)
-    synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
-    result = synthesizer.speak_text_async(text).get()
+    synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=None)
+    result = synthesizer.start_speaking_text_async(text).get()
     audio_data_stream = speechsdk.AudioDataStream(result)
     audio_buffer = bytes(16000)
     filled_size = audio_data_stream.read_data(audio_buffer)
