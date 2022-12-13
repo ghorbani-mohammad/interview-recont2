@@ -24,6 +24,5 @@ def synthesize_to_speaker(text):
 
 text = """
 There was once a baby show among the Animals in the forest. Jupiter provided the prize. 
-Of course all the proud mammas from far and near brought their babies.
 """
 synthesize_to_speaker(text)
